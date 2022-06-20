@@ -38,15 +38,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   timestamp: {
-    position: "absolute",
-    width: "100%",
-    fontSize: "11px",
     marginTop: "8px",
-    top: "100%",
-    left: "0",
     whiteSpace: "nowrap",
     color: "#999",
-    textAlign: props => props.isMe ? "right" : "left",
+    marginLeft: props => props.isMe ? "auto" : "initial",
   }
 }));
 
@@ -67,8 +62,8 @@ const MessageBubble = (props) => {
         <div>
           {message.message}
         </div>
-        <div className={classes.timestamp}>{moment(message.createdAt).format('l LT')}</div>
       </div>
+      <div className={classes.timestamp}>{moment(message.createdAt).format('l LT')}</div>
     </div>
   );
 };

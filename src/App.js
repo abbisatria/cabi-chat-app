@@ -1,7 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Button, CircularProgress } from '@material-ui/core';
 import Main from './pages/Main';
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
@@ -16,6 +14,7 @@ import {
 } from "@apollo/client";
 import { useState } from 'react';
 import { RecoilRoot } from 'recoil';
+import Loading from './components/Loading';
 
 function App() {
 
@@ -23,7 +22,7 @@ function App() {
   const [token, setToken] = useState('');
 
   if (isLoading) {
-    return <CircularProgress />
+    return <Loading />
   }
 
   getIdTokenClaims().then(res => {
@@ -81,17 +80,7 @@ function App() {
           <Main />
         </RecoilRoot>
       ) : (
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <Button
-              onClick={() => loginWithRedirect()}
-              variant="contained" color="primary"
-            >
-              Login
-            </Button>
-          </header>
-        </div>
+        loginWithRedirect()
       )}
     </ApolloProvider>
   );
